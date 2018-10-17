@@ -1,9 +1,30 @@
 Package: eflows.viz
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-Depends: R (>= 3.3.2)
-License: What license is it under?
+Title: Visualization tools for eflows
+Version: 0.0.1.9000
+Date: 2018-16-10
+Author: person("Carlos", "Varela Martin", email = "cvarelamail@gmail.com",
+    role = c("aut", "cre"))
+Maintainer: Carlos Varela Martin <cvarelamail@gmail.com>
+Description: A toolbox for visualizing e_frame objects generated with
+    the R package 'eflows'
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 3.3.2)
 LazyData: true
+Imports: eflows, 
+    zoo, 
+    xts, 
+    dygraphs, 
+    lubridate, 
+    shiny, 
+    miniUI, 
+    shinyWidgets
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown,
+    testthat, 
+    covr
+VignetteBuilder: knitr
+URL: https://github.com/cvmartin/eflows.viz
+BugReports: https://github.com/cvmartin/eflows.viz/issues
+
