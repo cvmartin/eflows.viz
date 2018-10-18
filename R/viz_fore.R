@@ -31,18 +31,15 @@ viz_fore_input <- function(obj, show_fixed = TRUE){
     f <- as.matrix(x$fixed)
     colnames(f) <- "fixed"
     data <- cbind(data, f)
-    pal <- c(pal, neutral)
+    pal <- c(pal, col$neutral)
   }
 
   xdata <- mtx_dyprepare(data, obj$time$series)
 
-  dy <- dyOptions(dygraph(xdata),
-                  stackedGraph = TRUE,
-                  colors = pal,
-                  fillAlpha = 0.7)
-  dy
+  dy_style(dygraph(xdata), stackedGraph = TRUE, colors = pal)
 
 }
+
 
 #' @export
 viz_fore_output <- function(obj, show_fixed = TRUE){
@@ -67,14 +64,11 @@ viz_fore_output <- function(obj, show_fixed = TRUE){
     f <- as.matrix(x$demand_fixed)
     colnames(f) <- "fixed"
     data <- cbind(data, f)
-    pal <- c(pal, neutral)
+    pal <- c(pal, col$neutral)
   }
 
   xdata <- mtx_dyprepare(data, obj$time$series)
 
-  dy <- dyOptions(dygraph(xdata),
-                  stackedGraph = TRUE,
-                  colors = pal,
-                  fillAlpha = 0.7)
-  dy
+  dy_style(dygraph(xdata), stackedGraph = TRUE, colors = pal)
+
 }
