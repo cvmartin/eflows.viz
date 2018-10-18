@@ -29,7 +29,6 @@ dy_style <- function(dygraph, ...) {
   dy <- dyOptions(dy,
                   fillAlpha = 0.8,
                   mobileDisableYTouch = TRUE,
-                  animatedZooms = TRUE,
                   ...)
 
   dy <- dyCSS(dy, system.file("css", "dygraph_style.css", package = "eflows.viz"))

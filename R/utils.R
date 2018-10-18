@@ -1,9 +1,7 @@
 
 
-
-# set the names of the columns from low to high, preceded by "name".
-mtx_tag_col <- function(matrix, name){
-  names <- sapply(seq(1:ncol(matrix)),
+mtx_tag_col <- function(matrix, name, vector = seq(1:ncol(matrix))){
+  names <- sapply(vector,
                   function(x){paste0(name, "_", x)}
   )
   colnames(matrix) <- names
@@ -12,13 +10,12 @@ mtx_tag_col <- function(matrix, name){
 
 # swap the order of the columns (last columns are displayed below in dygraphs)
 mtx_reverse <- function(matrix){
-  matrix[, rev(seq_len(ncol(matrix)))]
+  subset(matrix, ,rev(seq_len(ncol(matrix))))
 }
 
 # remove columns whose sum is zero
 mtx_rm_zerocol <- function(matrix){
-  if (is.vector(matrix)) matrix <- as.matrix(matrix)
-  matrix[,apply(matrix, 2, sum) != 0]
+  subset(matrix, ,apply(matrix, 2, sum) != 0)
 }
 
 # Prepare the data for dygraph display (returns either a ts or a df)

@@ -17,8 +17,9 @@ viz_fore_input <- function(obj, show_fixed = TRUE){
   x <- obj$demand$input
 
   data <-  mapply(mtx_tag_col,
-                  lapply(x$flex, function(x){x[["data"]]}),
-                  lapply(x$flex, function(x){x[["name"]]}),
+                  matrix = lapply(x$flex, function(x){x[["data"]]}),
+                  name = lapply(x$flex, function(x){x[["name"]]}),
+                  vector = lapply(x$flex, function(x){x[["steps"]]}),
                   SIMPLIFY = FALSE)
 
   data <-  lapply(data, mtx_reverse)
@@ -50,8 +51,8 @@ viz_fore_output <- function(obj, show_fixed = TRUE){
   x <- obj$demand$output
 
   data <-  mapply(mtx_tag_col,
-                  x$demand_flex,
-                  as.list(names(x$demand_flex)),
+                  matrix = x$demand_flex,
+                  name = as.list(names(x$demand_flex)),
                   SIMPLIFY = FALSE)
 
   data <-  lapply(data, mtx_reverse)
