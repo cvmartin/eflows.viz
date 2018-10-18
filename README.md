@@ -10,6 +10,21 @@ eflows.viz is a visualization package for eflows. eflows generates
 be processed by additional functions to extend the data pipeline, or in
 the case of eflows.viz, provide visualization and dashboarding.
 
+## Visualizations
+
+  - basic: `viz` + basic operation (`fore`, `back`, `sim`…) +
+    explanative suffix. An specific case of suffix is `sum_*`, used for
+    summaries. Example: `viz_fore_input`, `viz_fore_output`,
+    `viz_back_sum_obj`
+
+  - groups: `gviz` + explanative suffix (normally something simple, like
+    `fore` or `back`). The groups bundle several visualizations in a
+    list, normally with the `y` axis normalized so they look nice side
+    by side.
+
+  - vizget: when passes a `gviz` as argument, it deploys a shiny gadget
+    that allows easy comparison.
+
 ## Installation
 
 ``` r

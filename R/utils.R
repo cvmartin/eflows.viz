@@ -17,6 +17,7 @@ mtx_reverse <- function(matrix){
 
 # remove columns whose sum is zero
 mtx_rm_zerocol <- function(matrix){
+  if (is.vector(matrix)) matrix <- as.matrix(matrix)
   matrix[,apply(matrix, 2, sum) != 0]
 }
 
@@ -32,67 +33,14 @@ mtx_dyprepare <- function(matrix, vector){
   )
 }
 
-# display -----------------------------------------------------------------
-display_object <- function(obj, show_fixed = TRUE){
-  x <- obj$demand$output
+# validate -----------------------------------------------------------------
 
-  data <-  mapply(mtx_tag_col,
-                  x$demand_flex,
-                  as.list(names(x$demand_flex)),
-                  SIMPLIFY = FALSE)
+val <- list(
+  is_e_frame = function(x){stopifnot(inherits(x, "e_frame"))},
+  has_demand_input = function(x){stopifnot(!is.null(x$demand$input))},
+  has_demand_output = function(x){stopifnot(!is.null(x$demand$output))}
+)
 
-  data <-  lapply(data, mtx_reverse)
-  data <- lapply(data, mtx_rm_zerocol)
-  data <- do.call(cbind, rev(data))
-
-  pal <- c(foregrad(ncol(data)))
-
-  if (show_fixed == TRUE){
-    f <- as.matrix(x$demand_fixed)
-    colnames(f) <- "fixed"
-    data <- cbind(data, f)
-    pal <- c(pal, neutral)
-  }
-
-  xdata <- mtx_dyprepare(data, obj$time$series)
-
-  dy <- dyOptions(dygraph(xdata),
-                  stackedGraph = TRUE,
-                  colors = pal,
-                  fillAlpha = 0.7)
-  dy
-}
-
-display_original <- function(obj, show_fixed = TRUE){
-  x <- obj$demand$input
-
-  data <-  mapply(mtx_tag_col,
-                  lapply(x$flex, function(x){x[["data"]]}),
-                  lapply(x$flex, function(x){x[["name"]]}),
-                  SIMPLIFY = FALSE)
-
-  data <-  lapply(data, mtx_reverse)
-  data <- lapply(data, mtx_rm_zerocol)
-  data <- do.call(cbind, rev(data))
-
-  pal <- c(foregrad(ncol(data)))
-
-  if (show_fixed == TRUE){
-    f <- as.matrix(x$fixed)
-    colnames(f) <- "fixed"
-    data <- cbind(data, f)
-    pal <- c(pal, neutral)
-  }
-
-  xdata <- mtx_dyprepare(data, obj$time$series)
-
-  dy <- dyOptions(dygraph(xdata),
-                  stackedGraph = TRUE,
-                  colors = pal,
-                  fillAlpha = 0.7)
-  dy
-
-}
 
 
 # combine dygraphs --------------------------------------------------------
