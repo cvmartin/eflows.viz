@@ -10,12 +10,12 @@ mtx_tag_col <- function(matrix, name, vector = seq(1:ncol(matrix))){
 
 # swap the order of the columns (last columns are displayed below in dygraphs)
 mtx_reverse <- function(matrix){
-  subset(matrix, ,rev(seq_len(ncol(matrix))))
+  matrix[,rev(seq_len(ncol(matrix))), drop = FALSE]
 }
 
 # remove columns whose sum is zero
 mtx_rm_zerocol <- function(matrix){
-  subset(matrix, ,apply(matrix, 2, sum) != 0)
+  matrix[,apply(matrix, 2, sum) != 0, drop = FALSE]
 }
 
 # Prepare the data for dygraph display (returns either a ts or a df)
@@ -28,6 +28,23 @@ mtx_dyprepare <- function(matrix, vector){
   as.data.frame(
     cbind(vector, matrix)
   )
+}
+
+# interleave matrices
+mtx_to_list <- function(mtx){
+  l <- split(mtx, rep(1:ncol(mtx), each = nrow(mtx)))
+  names(l) <- colnames(mtx)
+  l
+}
+mtx_interleave <- function(mtx_list){
+  list_vectorized <- lapply(mtx_list, mtx_to_list)
+  list_grouped <- do.call(function(...){c(rbind(...))}, list_vectorized)
+  names <- as.vector(
+    do.call(rbind,
+            lapply(mtx_list, function(x){colnames(x)}))
+  )
+  names(list_grouped) <- names
+  do.call(cbind, list_grouped)
 }
 
 # validate -----------------------------------------------------------------
