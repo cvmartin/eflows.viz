@@ -3,7 +3,9 @@
 # color -------------------------------------------------------------------
 
 col = list(
-  neutral = "skyblue"
+  neutral = "skyblue",
+  green_success = "green", #green4
+  gray_dull = "gray"
 )
 
 foregrad <- function(x){
@@ -19,18 +21,22 @@ backgrad <- function(x){
 
 # dygraphs ----------------------------------------------------------------
 
-dy_style <- function(dygraph, ...) {
+dy_style <- function(dygraph, units, ...) {
   dy <- dyHighlight(dygraph,
                     highlightSeriesBackgroundAlpha = 0.6,
                     highlightSeriesOpts = list(strokeWidth = 2))
 
+  dy <- dyAxis(dy, "y", label = units)
+
   dy <- dyLegend(dy, show = "onmouseover", width = 150)
 
   dy <- dyOptions(dy,
-                  fillAlpha = 0.8,
                   mobileDisableYTouch = TRUE,
                   ...)
 
   dy <- dyCSS(dy, system.file("css", "dygraph_style.css", package = "eflows.viz"))
   dy
 }
+
+
+

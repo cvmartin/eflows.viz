@@ -4,7 +4,8 @@
 \alias{viz_fore_input}
 \title{Visualize foreshift}
 \usage{
-viz_fore_input(obj, show_fixed = TRUE)
+viz_fore_input(obj, show_fixed = TRUE, aggregate = c("none", "object",
+  "flex", "all"))
 }
 \arguments{
 \item{obj}{an `e_frame` object}

@@ -47,6 +47,10 @@ mtx_interleave <- function(mtx_list){
   do.call(cbind, list_grouped)
 }
 
+mtx_rsum <- function(mtx){
+  apply(mtx, 1, sum)
+}
+
 # validate -----------------------------------------------------------------
 
 val <- list(
