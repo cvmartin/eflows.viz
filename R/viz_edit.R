@@ -1,8 +1,8 @@
 
 #' Especify the randge of the Y axis in a dygraph
 #'
-#' @param dy
-#' @param n
+#' @param dy Dygraph
+#' @param n Double
 #'
 #' @return A dygraph, with the especification of the Y axis modified
 #' @export
@@ -41,3 +41,29 @@ max_yaxis <- function(list_stacked = NULL, list_unstacked = NULL) {
   themax <- ifelse(themax_s > themax_u, themax_s, themax_u)
   themax
 }
+
+
+
+#' Bundle several dygraphs
+#'
+#' @param ... dygraphs
+#' @param ymax if supplied, the y randge of all graphs is et between 0 and `ymax`
+#' @param names names to give to the graphs
+#'
+#' @return list of graphs
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_bundle <- function(..., ymax = NULL, names = NULL) {
+  dylist <- list(...)
+
+  if (!is.null(ymax)) {
+    dylist <- lapply(dylist, set_yaxis, n = ymax)
+  }
+  if (!is.null(names)){
+    names(dylist) <- names
+  }
+  dylist
+}
+

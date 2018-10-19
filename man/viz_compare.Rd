@@ -7,9 +7,9 @@
 viz_compare(dylist, colnames)
 }
 \arguments{
-\item{colnames}{vector with the names to display in dygraph legend}
+\item{dylist}{List of dygraphs to compare. Normally two.}
 
-\item{list}{List of dygraphs to compare. Normally two.}
+\item{colnames}{vector with the names to display in dygraph legend}
 }
 \value{
 A dygraph

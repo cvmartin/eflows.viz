@@ -1,7 +1,7 @@
 
 #' Compare two or more dygraphs
 #'
-#' @param list List of dygraphs to compare. Normally two.
+#' @param dylist List of dygraphs to compare. Normally two.
 #' @param colnames vector with the names to display in dygraph legend
 #'
 #' @return A dygraph

@@ -15,15 +15,13 @@
 #' @examples
 #' 1+1
 df_to_ts <- function(df) {
-  require(xts)
-  new_ts <- xts(x = df[, 2:(length(colnames(df)))], order.by = df[[1]])
+  new_ts <- xts::xts(x = df[, 2:(length(colnames(df)))], order.by = df[[1]])
   if (is.null(colnames(new_ts))) colnames(new_ts) <- colnames(df[2])
-  return(new_ts)
+  new_ts
 }
 
 ts_to_df <- function(tseries){
-  require(xts)
-  new_df <- as_tibble(data.frame(datetime=index(tseries), coredata(tseries)))
+  data.frame(datetime=index(tseries), coredata(tseries))
 }
 
 

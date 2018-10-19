@@ -2,6 +2,7 @@
 #'
 #' @param obj an `e_frame` object
 #' @param show_fixed display the original fixed demand
+#' @param aggregate level of aggregation.
 #'
 #' @return
 #' dygraph with the results

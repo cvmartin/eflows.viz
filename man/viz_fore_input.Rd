@@ -11,6 +11,8 @@ viz_fore_input(obj, show_fixed = TRUE, aggregate = c("none", "object",
 \item{obj}{an `e_frame` object}
 
 \item{show_fixed}{display the original fixed demand}
+
+\item{aggregate}{level of aggregation.}
 }
 \value{
 dygraph with the results
