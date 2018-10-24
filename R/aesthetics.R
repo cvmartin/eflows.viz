@@ -3,14 +3,14 @@
 # color -------------------------------------------------------------------
 
 col = list(
-  neutral = "skyblue",
+  neutral = "#90B4D2",
   green_success = "green", #green4
   gray_dull = "gray"
 )
 
 foregrad <- function(x){
-  if (x == 1) return("olivedrab")
-  colorRampPalette(c("orange","olivedrab",  "darkgreen"))(x)
+  if (x == 1) return("darkgreen")
+  colorRampPalette(c("orange","olivedrab", "darkgreen"))(x)
 }
 
 backgrad <- function(x){
@@ -32,6 +32,7 @@ dy_style <- function(dygraph, units, ...) {
 
   dy <- dyOptions(dy,
                   mobileDisableYTouch = TRUE,
+                  retainDateWindow = TRUE,
                   ...)
 
   dy <- dyCSS(dy, system.file("css", "dygraph_style.css", package = "eflows.viz"))

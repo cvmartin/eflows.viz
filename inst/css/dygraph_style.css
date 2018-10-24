@@ -9,22 +9,14 @@
 .dygraph-legend {
   color: white;
   background-color: #BABABA !important;
-    padding-left:5px;
+  padding-left:5px;
   border-color:#BABABA;
-    border-style:solid;
+  border-style:solid;
   border-width:thin;
   transition:0s 4s;
   z-index: 20 !important;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
   border-radius: 3px;
-}
-
-.shiny-tab-input li.active{
-  box-shadow: 5px 0 5px -5px rgba(0, 0, 0, .3);
-}
-
-#login_panel {
-box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
 }
 
 .dygraph-legend:hover{
@@ -40,6 +32,10 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
   display: block;
 }
 
+.dygraph-legend > span:first-child {
+  margin-top:2px;
+}
+
 .dygraph-legend > span > span{
   display: inline;
 }
@@ -47,5 +43,4 @@ box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
 .highlight {
   border-left: 2px solid #BABABA;
   padding-left:3px !important;
-
 }

@@ -1,7 +1,7 @@
 
 #' Convert a data frame in a time series
 #'
-#' @param df
+#' @param df Data frame
 #'
 #' @return time series
 #' @import zoo

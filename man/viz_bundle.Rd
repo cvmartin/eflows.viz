@@ -4,7 +4,7 @@
 \alias{viz_bundle}
 \title{Bundle several dygraphs}
 \usage{
-viz_bundle(..., ymax = NULL, names = NULL)
+viz_bundle(..., ymax = NULL, names = NULL, group = NULL)
 }
 \arguments{
 \item{...}{dygraphs}

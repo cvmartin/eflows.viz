@@ -22,12 +22,11 @@ mtx_rm_zerocol <- function(matrix){
 mtx_dyprepare <- function(matrix, vector){
   if (is_POSIXt(vector)) {
     new_ts <- xts(x = matrix, order.by = vector)
-    if (is.null(colnames(new_ts))) colnames(new_ts) <- colnames(df[2])
+    if (is.null(colnames(new_ts))) colnames(new_ts) <- colnames(matrix)
     return(new_ts)
   }
-  as.data.frame(
-    cbind(vector, matrix)
-  )
+
+  as.data.frame(cbind(vector, matrix))
 }
 
 # interleave matrices
@@ -58,33 +57,3 @@ val <- list(
   has_demand_input = function(x){stopifnot(!is.null(x$demand$input))},
   has_demand_output = function(x){stopifnot(!is.null(x$demand$output))}
 )
-
-
-
-# combine dygraphs --------------------------------------------------------
-dy_equalize_y <- function(stacked, unstacked) {
-  stackedmax <- function(q){max(Reduce(`+`, q$x$data[2:length(q$x$data)]))}
-  themax_s <- max(sapply(stacked, stackedmax)) * 1.05
-
-  unstackedmax <- function(q){max(sapply(q$x$data[2:length(q$x$data)], max))}
-  themax_u <- max(sapply(unstacked, unstackedmax)) * 1.05
-
-  themax <- ifelse(themax_s > themax_u, themax_s, themax_u)
-
-  set_y_range <- function(q){
-    q$x$attrs$axes$y$valueRange <- c(0, themax)
-    q
-  }
-
-  lapply(c(stacked, unstacked), set_y_range)
-}
-
-dy_compare_total <- function(list, colnames) {
-  stack_all <- function(q){Reduce(`+`, q$x$data[2:length(q$x$data)])}
-
-  mtx <- do.call(cbind, lapply(list, stack_all))
-  colnames(mtx) <- colnames
-
-  d <- xts(x = mtx, order.by = as_datetime(list[[1]]$x$data[[1]]))
-  dyOptions(dygraph(d), fillGraph = TRUE)
-}

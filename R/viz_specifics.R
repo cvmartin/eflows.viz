@@ -1,0 +1,108 @@
+viz_vector <- function(obj, path_data, path_unit, name){
+
+  data <- as.matrix(path_data)
+  colnames(data) <- c(name)
+
+  xdata <- mtx_dyprepare(data, obj$setup$time$series)
+
+  dy_style(dygraph(xdata),
+           units = path_unit,
+           fillGraph = TRUE)
+}
+
+
+
+# Graph of the price
+
+#' Compare two or more dygraphs
+#'
+#' @param obj e_frame object.
+#'
+#' @return A dygraph
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_price <- function(obj) {
+  viz_vector(obj,
+             path_data = obj$utility$input$price,
+             path_unit = obj$setup$units$price,
+             name = "price")
+}
+
+# viz_price <- function(obj){
+#   data <- as.matrix(obj$utility$input$price)
+#   colnames(data) <- c("price")
+#
+#   xdata <- mtx_dyprepare(data, obj$setup$time$series)
+#
+#   dy_style(dygraph(xdata),
+#            units = obj$setup$units$price,
+#            fillGraph = TRUE)
+# }
+
+
+# Graph of the fixed production
+
+#' Compare two or more dygraphs
+#'
+#' @param obj e_frame object.
+#'
+#' @return A dygraph
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_production_fixed <- function(obj) {
+  viz_vector(obj,
+             path_data = obj$production$sum_fixed,
+             path_unit = obj$setup$units$energy,
+             name = "production_fixed")
+}
+
+
+# Graph of the fixed demand
+
+#' Compare two or more dygraphs
+#'
+#' @param obj e_frame object.
+#'
+#' @return A dygraph
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_demand_fixed <- function(obj) {
+  viz_vector(obj,
+             path_data = obj$demand$input$fixed,
+             path_unit = obj$setup$units$energy,
+             name = "consumption_fixed")
+}
+
+# Graph of the fitting curve
+
+#' Compare two or more dygraphs
+#'
+#' @param obj e_frame object.
+#'
+#' @return A dygraph
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_fit <- function(obj) {
+  fit_intial <- viz_vector(obj,
+                           path_data = obj$utility$input$fit$curve,
+                           path_unit = "",
+                           name = "fit_curve_initial")
+
+  fit_final <- viz_vector(obj,
+                           path_data = obj$utility$output$fit$curve,
+                           path_unit = "",
+                           name = "fit_curve_final")
+
+  viz_compare(list(fit_intial,fit_final), colnames = c("fit_curve_initial", "fit_curve_final"))
+}
+
+
+

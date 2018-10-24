@@ -7,7 +7,7 @@
 df_to_ts(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame}
 }
 \value{
 time series

@@ -14,6 +14,12 @@ set_yaxis <- function(dy, n){
   dy
 }
 
+set_group <- function(dy, groupname){
+  dy$x$group <- groupname
+  dy
+}
+
+
 #' Find the maximum drawing in the Y axis
 #'
 #' @param list_stacked Dygraph lists that is intended to show stacked
@@ -43,7 +49,6 @@ max_yaxis <- function(list_stacked = NULL, list_unstacked = NULL) {
 }
 
 
-
 #' Bundle several dygraphs
 #'
 #' @param ... dygraphs
@@ -55,7 +60,7 @@ max_yaxis <- function(list_stacked = NULL, list_unstacked = NULL) {
 #'
 #' @examples
 #' 1+1
-viz_bundle <- function(..., ymax = NULL, names = NULL) {
+viz_bundle <- function(..., ymax = NULL, names = NULL, group = NULL) {
   dylist <- list(...)
 
   if (!is.null(ymax)) {
@@ -64,6 +69,9 @@ viz_bundle <- function(..., ymax = NULL, names = NULL) {
   if (!is.null(names)){
     names(dylist) <- names
   }
+
+  dylist <- lapply(dylist, set_group, groupname = group)
+
   dylist
 }
 
