@@ -1,12 +1,14 @@
 /* dygraph styling */
 
-  .dygraph-title {
-    text-align: left;
-    font-weight: normal;
-    font-size: 70%;
-  }
+.dygraph-title {
+  text-align: left;
+  font-weight: normal;
+  font-size: 70%;
+}
 
 .dygraph-legend {
+  width: auto !important;
+  min-width: 150px;
   color: white;
   background-color: #BABABA !important;
   padding-left:5px;
@@ -27,6 +29,7 @@
 .dygraph-legend > span {
   color: black;
   padding-left:5px;
+  padding-right:2px;
   margin-left:-5px;
   background-color: white !important;
   display: block;

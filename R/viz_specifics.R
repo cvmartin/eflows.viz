@@ -93,12 +93,12 @@ viz_demand_fixed <- function(obj) {
 viz_fit <- function(obj) {
   fit_intial <- viz_vector(obj,
                            path_data = obj$utility$input$fit$curve,
-                           path_unit = "",
+                           path_unit = "utility",
                            name = "fit_curve_initial")
 
   fit_final <- viz_vector(obj,
                            path_data = obj$utility$output$fit$curve,
-                           path_unit = "",
+                           path_unit = "utility",
                            name = "fit_curve_final")
 
   viz_compare(list(fit_intial,fit_final), colnames = c("fit_curve_initial", "fit_curve_final"))
