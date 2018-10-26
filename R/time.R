@@ -9,7 +9,7 @@
 #' @import dygraphs
 #' @import lubridate
 #' @import shiny
-#' @import shinyWidgets
+#' @import miniUI
 #' @export
 #'
 #' @examples

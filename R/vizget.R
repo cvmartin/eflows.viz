@@ -1,4 +1,3 @@
-
 #' Visualization gadget for bundles of graphs
 #'
 #' @param dybundle Object generated with viz_bundle
