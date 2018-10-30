@@ -15,6 +15,7 @@ viz_fore_input <- function(obj,
                            aggregate = c("none", "object", "flex", "all")){
 
   agg <- match.arg(aggregate)
+  palette_function <- foregrad
 
   val$is_e_frame(obj)
   val$has_demand_input(obj)
@@ -37,6 +38,7 @@ viz_fore_input <- function(obj,
                       lapply(local$data, mtx_rsum))
     colnames(summed) <- local$name
     data <- list(summed)
+    palette_function <- gg_palette
   }
 
   if (agg == "flex"){
@@ -57,7 +59,7 @@ viz_fore_input <- function(obj,
   data <- lapply(data, mtx_rm_zerocol)
   data <- do.call(cbind, rev(data))
 
-  pal <- c(foregrad(ncol(data)))
+  pal <- c(palette_function(ncol(data)))
 
   if (show_fixed == TRUE){
     f <- as.matrix(route$fixed)
@@ -82,6 +84,7 @@ viz_fore_output <- function(obj,
                             aggregate = c("none", "object", "flex", "all")){
 
   agg <- match.arg(aggregate)
+  palette_function <- foregrad
 
   val$is_e_frame(obj)
   val$has_demand_output(obj)
@@ -102,6 +105,7 @@ viz_fore_output <- function(obj,
      summed <- do.call(cbind,
                        lapply(local$data, mtx_rsum))
      data <- list(summed)
+     palette_function <- gg_palette
   }
 
   if (agg == "flex"){
@@ -122,7 +126,7 @@ viz_fore_output <- function(obj,
   data <- lapply(data, mtx_rm_zerocol)
   data <- do.call(cbind, rev(data))
 
-  pal <- c(foregrad(ncol(data)))
+  pal <- c(palette_function(ncol(data)))
 
   if (show_fixed == TRUE){
     f <- as.matrix(route$fixed)

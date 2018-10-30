@@ -7,7 +7,8 @@ viz_vector <- function(obj, path_data, path_unit, name){
 
   dy_style(dygraph(xdata),
            units = path_unit,
-           fillGraph = TRUE)
+           fillGraph = TRUE,
+           includeZero = TRUE)
 }
 
 

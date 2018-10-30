@@ -22,5 +22,6 @@ viz_compare <- function(dylist, colnames) {
   dy_style(dygraph(d),
            units = dylist[[1]]$x$attrs$ylabel,
            fillGraph = TRUE,
+           includeZero = TRUE,
            colors = pal)
 }

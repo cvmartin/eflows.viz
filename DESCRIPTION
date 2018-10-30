@@ -1,6 +1,6 @@
 Package: eflows.viz
 Title: Visualization tools for eflows
-Version: 0.0.2.9000
+Version: 0.1.0.9000
 Date: 2018-16-10
 Author: person("Carlos", "Varela Martin", email = "cvarelamail@gmail.com",
     role = c("aut", "cre"))
