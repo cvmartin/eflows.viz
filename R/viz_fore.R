@@ -11,7 +11,7 @@
 #' @examples
 #' 1+1
 viz_fore_input <- function(obj,
-                           show_fixed = TRUE,
+                           show_fixed = TRUE, stacked = TRUE,
                            aggregate = c("none", "object", "flex", "all")){
 
   agg <- match.arg(aggregate)
@@ -72,7 +72,7 @@ viz_fore_input <- function(obj,
 
   dy_style(dygraph(xdata),
            units = obj$setup$units$energy,
-           stackedGraph = TRUE,
+           stackedGraph = stacked,
            fillAlpha = 0.8,
            colors = pal)
 }
@@ -80,7 +80,7 @@ viz_fore_input <- function(obj,
 
 #' @export
 viz_fore_output <- function(obj,
-                            show_fixed = TRUE,
+                            show_fixed = TRUE, stacked = TRUE,
                             aggregate = c("none", "object", "flex", "all")){
 
   agg <- match.arg(aggregate)
@@ -139,7 +139,7 @@ viz_fore_output <- function(obj,
 
   dy_style(dygraph(xdata),
            units = obj$setup$units$energy,
-           stackedGraph = TRUE,
+           stackedGraph = stacked,
            fillAlpha = 0.8,
            colors = pal)
 }
