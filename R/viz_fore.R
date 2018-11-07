@@ -26,6 +26,9 @@ viz_fore_input <- function(obj,
 viz_fore_output <- function(obj,
                             show_fixed = TRUE, stacked = TRUE,
                             aggregate = c("none", "object", "flex", "all")){
+
+  val$has_demand_output(obj)
+
   viz_blank(obj = obj,
             route = obj$demand$output,
             show_fixed = show_fixed,

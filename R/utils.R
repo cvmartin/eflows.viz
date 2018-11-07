@@ -61,6 +61,15 @@ val <- list(
 
 # viz ---------------------------------------------------------------------
 
+dyUnzoom <-function(dygraph) {
+  dyPlugin(
+    dygraph = dygraph,
+    name = "Unzoom",
+    path = system.file("plugins/unzoom.js", package = "dygraphs")
+  )
+}
+
+
 viz_blank <- function(obj,
                       route,
                       show_fixed = TRUE, stacked = TRUE,
@@ -71,7 +80,6 @@ viz_blank <- function(obj,
   palette_function <- palette_function
 
   val$is_e_frame(obj)
-  val$has_demand_output(obj)
 
   route <- route
 

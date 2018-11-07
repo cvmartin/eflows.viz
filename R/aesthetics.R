@@ -40,6 +40,8 @@ dy_style <- function(dygraph, units, ...) {
                   retainDateWindow = TRUE,
                   ...)
 
+  dy <- dyUnzoom(dy)
+
   dy <- dyCSS(dy, system.file("css", "dygraph_style.css", package = "eflows.viz"))
   dy
 }
