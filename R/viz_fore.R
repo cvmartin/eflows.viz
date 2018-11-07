@@ -90,22 +90,26 @@ viz_fore_output <- function(obj,
   val$has_demand_output(obj)
 
   route <- obj$demand$output
-  local <- list(data = route$flex,
-                name = as.list(names(route$flex))
-                )
+
+  local <- list(data = lapply(route$flex, function(x){x[["data"]]}),
+                name = lapply(route$flex, function(x){x[["name"]]}),
+                steps = lapply(route$flex, function(x){x[["steps"]]}))
+
 
   if (agg == "none"){
     data <-  mapply(mtx_tag_col,
                     matrix = local$data,
                     name = local$name,
+                    vector = local$steps,
                     SIMPLIFY = FALSE)
   }
 
   if (agg == "object"){
-     summed <- do.call(cbind,
-                       lapply(local$data, mtx_rsum))
-     data <- list(summed)
-     palette_function <- gg_palette
+    summed <- do.call(cbind,
+                      lapply(local$data, mtx_rsum))
+    colnames(summed) <- local$name
+    data <- list(summed)
+    palette_function <- gg_palette
   }
 
   if (agg == "flex"){
