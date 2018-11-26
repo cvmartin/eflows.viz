@@ -1,5 +1,17 @@
 
 
+# utils -------------------------------------------------------------------
+
+listify <- function(input) {
+  if (is.list(input)) {return(input)}
+  list(input)
+}
+
+`%||%` <- function (x, y){
+  if (is.null(x)) y else x
+}
+
+# matrix manipulation -----------------------------------------------------
 mtx_tag_col <- function(matrix, name, vector = seq(1:ncol(matrix))){
   names <- sapply(vector,
                   function(x){paste0(name, "_", x)}
@@ -72,7 +84,10 @@ dyUnzoom <-function(dygraph) {
 
 viz_blank <- function(obj,
                       route,
-                      show_fixed = TRUE, stacked = TRUE,
+                      show_fixed = TRUE,
+                      show_cap = NULL,
+                      zoom_cap = FALSE,
+                      stacked = TRUE,
                       aggregate = c("none", "object", "flex", "all"),
                       palette_function){
 
@@ -131,9 +146,38 @@ viz_blank <- function(obj,
     pal <- c(pal, col$neutral)
   }
 
-  xdata <- mtx_dyprepare(data, obj$setup$time$series)
+  # What about using TRUE; FALSE and NULL?
+  if (show_cap != FALSE){
+    cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
+    if (is.null(cap_data)){
+      if (show_cap == TRUE){
+        stop("grid capacity data not found while `show_cap == TRUE`")
+      }
+      break
+    }
+    c <- as.matrix(cap_data)
+    colnames(c) <- "grid capacity"
+    data <- cbind(data, c)
+    pal <- c(pal, col$cap)
+  }
 
-  dy_style(dygraph(xdata),
+  xdata <- mtx_dyprepare(data, obj$setup$time$series)
+  xdygraph <- dygraph(xdata)
+
+  if (show_cap != FALSE & !is.null(cap_data)) {
+    xdygraph <-   dySeries(xdygraph, "grid capacity", axis = "y2",
+                           # color = "red",
+                           fillGraph = FALSE,
+                           strokePattern = "dashed")
+
+    # Get the max
+    # dyAxis("y", valueRange = c(0, themax)) %>%
+      # dyAxis("y2", valueRange = c(0, themax), axisLabelWidth = 0) %>%
+
+  }
+
+
+  dy_style(xdygraph,
            units = obj$setup$units$energy,
            stackedGraph = stacked,
            fillAlpha = 0.8,

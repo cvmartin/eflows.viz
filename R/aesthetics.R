@@ -5,7 +5,8 @@
 col = list(
   neutral = "#90B4D2",
   green_success = "green", #green4
-  gray_dull = "gray"
+  gray_dull = "gray",
+  cap = "red"
 )
 
 gg_palette <- function(n) {

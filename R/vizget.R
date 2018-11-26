@@ -9,11 +9,11 @@
 #' 1+1
 vizget <- function(dybundle) {
   ui <- miniPage(
-    gadgetTitleBar(deparse(substitute(dybundle))),
+    gadgetTitleBar(deparse(substitute(dybundle)), left = NULL),
     miniContentPanel(
       fillCol(flex = c(NA, 1),
               div(style = "text-align: center;",
-                  uiOutput("rstripe")),
+                  radioButtons("rbutton", NULL, names(dybundle), inline = TRUE)),
               fillRow(
                 dygraphOutput("thegraph", height = 250)
               )
@@ -23,9 +23,6 @@ vizget <- function(dybundle) {
   server <- function(input, output, session) {
     output$thegraph <- renderDygraph({
       dybundle[[input$rbutton]]
-    })
-    output$rstripe <- renderUI({
-      radioButtons("rbutton", NULL, names(dybundle), inline = TRUE)
     })
     observeEvent(input$done, {
       stopApp()
