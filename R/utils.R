@@ -85,7 +85,7 @@ dyUnzoom <-function(dygraph) {
 viz_blank <- function(obj,
                       route,
                       show_fixed = TRUE,
-                      show_cap = NULL,
+                      show_cap = TRUE,
                       zoom_cap = FALSE,
                       stacked = TRUE,
                       aggregate = c("none", "object", "flex", "all"),
@@ -149,16 +149,12 @@ viz_blank <- function(obj,
   # What about using TRUE; FALSE and NULL?
   if (show_cap != FALSE){
     cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
-    if (is.null(cap_data)){
-      if (show_cap == TRUE){
-        stop("grid capacity data not found while `show_cap == TRUE`")
-      }
-      break
+    if (!is.null(cap_data)){
+      c <- as.matrix(cap_data)
+      colnames(c) <- "grid capacity"
+      data <- cbind(data, c)
+      pal <- c(pal, col$cap)
     }
-    c <- as.matrix(cap_data)
-    colnames(c) <- "grid capacity"
-    data <- cbind(data, c)
-    pal <- c(pal, col$cap)
   }
 
   xdata <- mtx_dyprepare(data, obj$setup$time$series)

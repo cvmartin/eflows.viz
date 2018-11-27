@@ -9,8 +9,11 @@
 #'
 #' @examples
 #' 1+1
-viz_compare <- function(dylist, colnames) {
-  stack_all <- function(q){Reduce(`+`, q$x$data[2:length(q$x$data)])}
+viz_compare <- function(dylist, colnames, ignore = c("grid capacity")) {
+  stack_all <- function(q){
+    q$x$data[match(ignore, q$x$attrs$labels)] <- NULL
+    Reduce(`+`, q$x$data[2:length(q$x$data)])
+    }
 
   mtx <- do.call(cbind, lapply(dylist, stack_all))
   colnames(mtx) <- colnames
