@@ -71,6 +71,33 @@ val <- list(
 )
 
 
+# edit (cap) ----------------------------------------------------------------
+add_cap <- function(dy, newseries, label = "grid capacity", color = "red", zoom = FALSE){
+
+  # max_y will be the stored maximum, first
+  max_y <- ifelse(!is.null(post$x$attrs$axes$y$valueRange),
+                  post$x$attrs$axes$y$valueRange,
+                  max_yaxis(list_stacked = list(dy)))
+
+  dy$x$data <- append(dy$x$data, list(newseries), 1)
+  dy$x$attrs$labels <- append(dy$x$attrs$labels, label, 1)
+  dy$x$attrs$colors <- c(color, dy$x$attrs$colors)
+
+  dy$x$attrs$series[[label]] <- list(axis = "y2", fillGraph = FALSE, stackedGraph = FALSE, strokePattern = c(7,3))
+  dy$x$attrs$axes$y2$axisLabelWidth <- 0
+
+  if (zoom == TRUE) {
+    max_y2 <- max_yaxis(list_unstacked = list(dy))
+    if (max_y2 > max_y) max_y <- max_y2
+  }
+
+  dy$x$attrs$axes$y$valueRange <- c(0, max_y)
+  dy$x$attrs$axes$y2$valueRange <- c(0, max_y)
+
+  dy
+}
+
+
 # viz ---------------------------------------------------------------------
 
 dyUnzoom <-function(dygraph) {
@@ -146,36 +173,20 @@ viz_blank <- function(obj,
     pal <- c(pal, col$neutral)
   }
 
-  # What about using TRUE; FALSE and NULL?
-  if (show_cap != FALSE){
-    cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
-    if (!is.null(cap_data)){
-      c <- as.matrix(cap_data)
-      colnames(c) <- "grid capacity"
-      data <- cbind(data, c)
-      pal <- c(pal, col$cap)
-    }
-  }
-
   xdata <- mtx_dyprepare(data, obj$setup$time$series)
-  xdygraph <- dygraph(xdata)
-
-  if (show_cap != FALSE & !is.null(cap_data)) {
-    xdygraph <-   dySeries(xdygraph, "grid capacity", axis = "y2",
-                           # color = "red",
-                           fillGraph = FALSE,
-                           strokePattern = "dashed")
-
-    # Get the max
-    # dyAxis("y", valueRange = c(0, themax)) %>%
-      # dyAxis("y2", valueRange = c(0, themax), axisLabelWidth = 0) %>%
-
-  }
-
-
-  dy_style(xdygraph,
+  xdygraph <- dy_style(dygraph(xdata),
            units = obj$setup$units$energy,
            stackedGraph = stacked,
            fillAlpha = 0.8,
            colors = pal)
+
+  # the cap is added manipulating the dygraph after it is rendered
+  if (show_cap == TRUE){
+    cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
+    if (!is.null(cap_data)){
+      xdygraph <- add_cap(xdygraph, cap_data, zoom = zoom_cap)
+    }
+  }
+
+  xdygraph
 }

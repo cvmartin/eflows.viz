@@ -11,7 +11,6 @@
 #' 1+1
 set_yaxis <- function(dy, n){
   dy$x$attrs$axes$y$valueRange <- c(0, n)
-  dy$x$attrs$axes$y2$valueRange <- c(0, n)
   dy
 }
 
@@ -33,35 +32,32 @@ set_group <- function(dy, groupname){
 #' 1+1
 max_yaxis <- function(list_stacked = list(),
                       list_unstacked = list(),
-                      ignore_stacked = c(),
-                      ignore_unstacked = c()) {
-
+                      update = FALSE) {
   # Assert that are lists
-
-  themax_s <- 0
-  if (length(list_stacked) > 0){
-    stackedmax <- function(q){
-      if (length(ignore_stacked) > 0){
-        q$x$data[match(ignore_stacked, q$x$attrs$labels)] <- NULL
-      }
-      data <- q$x$data[2:length(q$x$data)]
-      max(Reduce(`+`, data))
-      }
-    themax_s <- max(sapply(list_stacked, stackedmax)) * 1.05
-  }
-
-  themax_u <- 0
-  if (length(list_unstacked) > 0){
-    unstackedmax <- function(q){
-      if (length(ignore_unstacked) > 0){
-        q$x$data[match(ignore_unstacked, q$x$attrs$labels)] <- NULL
-      }
-      data <- q$x$data[2:length(q$x$data)]
-      max(sapply(data, max))
+  stackedmax <- function(q){
+    if (!is.null(q$x$attrs$axes$y$valueRange) & update = FALSE) {
+      return(q$x$attrs$axes$y$valueRange)
     }
-    themax_u <- max(sapply(list_unstacked, unstackedmax)) * 1.05
+    data <- q$x$data[2:length(q$x$data)]
+    max(Reduce(`+`, data))
   }
-  ifelse(themax_s > themax_u, themax_s, themax_u)
+  unstackedmax <- function(q){
+    if (!is.null(q$x$attrs$axes$y$valueRange) & update = FALSE) {
+      return(q$x$attrs$axes$y$valueRange)
+    }
+    data <- q$x$data[2:length(q$x$data)]
+    max(sapply(data, max))
+  }
+
+  themax_s <- ifelse(length(list_stacked) > 0,
+                     max(sapply(list_stacked, stackedmax)) * 1.05,
+                     0)
+  themax_u <- ifelse(length(list_unstacked) > 0,
+                     max(sapply(list_unstacked, unstackedmax)) * 1.05,
+                     0)
+  ifelse(themax_s > themax_u,
+         themax_s,
+         themax_u)
 }
 
 
