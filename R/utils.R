@@ -75,8 +75,8 @@ val <- list(
 add_cap <- function(dy, newseries, label = "grid capacity", color = "red", zoom = FALSE){
 
   # max_y will be the stored maximum, first
-  max_y <- ifelse(!is.null(post$x$attrs$axes$y$valueRange),
-                  post$x$attrs$axes$y$valueRange,
+  max_y <- ifelse(!is.null(dy$x$attrs$axes$y$valueRange),
+                  dy$x$attrs$axes$y$valueRange,
                   max_yaxis(list_stacked = list(dy)))
 
   dy$x$data <- append(dy$x$data, list(newseries), 1)

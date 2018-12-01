@@ -35,14 +35,14 @@ max_yaxis <- function(list_stacked = list(),
                       update = FALSE) {
   # Assert that are lists
   stackedmax <- function(q){
-    if (!is.null(q$x$attrs$axes$y$valueRange) & update = FALSE) {
+    if (!is.null(q$x$attrs$axes$y$valueRange) & update == FALSE) {
       return(q$x$attrs$axes$y$valueRange)
     }
     data <- q$x$data[2:length(q$x$data)]
     max(Reduce(`+`, data))
   }
   unstackedmax <- function(q){
-    if (!is.null(q$x$attrs$axes$y$valueRange) & update = FALSE) {
+    if (!is.null(q$x$attrs$axes$y$valueRange) & update == FALSE) {
       return(q$x$attrs$axes$y$valueRange)
     }
     data <- q$x$data[2:length(q$x$data)]
