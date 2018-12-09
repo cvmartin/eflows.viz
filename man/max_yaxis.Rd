@@ -4,7 +4,8 @@
 \alias{max_yaxis}
 \title{Find the maximum drawing in the Y axis}
 \usage{
-max_yaxis(list_stacked = NULL, list_unstacked = NULL)
+max_yaxis(list_stacked = list(), list_unstacked = list(),
+  update = FALSE)
 }
 \arguments{
 \item{list_stacked}{Dygraph lists that is intended to show stacked}

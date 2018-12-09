@@ -80,6 +80,35 @@ viz_demand_fixed <- function(obj) {
              name = "consumption_fixed")
 }
 
+
+
+#' See the capacity
+#'
+#' @param obj e_frame object.
+#'
+#' @return A dygraph
+#' @export
+#'
+#' @examples
+#' 1+1
+viz_cap <- function(obj) {
+  # viz_vector(obj,
+  #            path_data = obj$infrastructure$input$grid$capacity,
+  #            path_unit = obj$setup$units$energy,
+  #            name = "grid_capacity")
+  data <- as.matrix(obj$infrastructure$input$grid$capacity)
+  colnames(data) <- c("grid capacity")
+
+  xdata <- mtx_dyprepare(data, obj$setup$time$series)
+
+  dy_style(dygraph(xdata),
+           units = obj$setup$units$energy,
+           colors = "red",
+           strokePattern = c(7,3),
+           includeZero = TRUE
+           )
+}
+
 # Graph of the fitting curve
 
 #' Compare two or more dygraphs

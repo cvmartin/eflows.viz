@@ -11,12 +11,13 @@
 #' 1+1
 viz_compare <- function(dylist, colnames) {
 
-  stack_all <- function(q){
-    data <- q$x$data[2:length(q$x$data)]
+  stack_depend <- function(q){
+    datafrom <- ifelse(isTRUE(q$x$attrs$axes$y2$usedCap), 3, 2)
+    data <- q$x$data[datafrom:length(q$x$data)]
     Reduce(`+`, data)
     }
 
-  mtx <- do.call(cbind, lapply(dylist, stack_all))
+  mtx <- do.call(cbind, lapply(dylist, stack_depend))
   colnames(mtx) <- colnames
 
   pal <- c(col$gray_dull, col$green_success)

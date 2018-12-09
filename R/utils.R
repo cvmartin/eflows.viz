@@ -72,6 +72,7 @@ val <- list(
 
 
 # edit (cap) ----------------------------------------------------------------
+
 add_cap <- function(dy, newseries, label = "grid capacity", color = "red", zoom = FALSE){
 
   # max_y will be the stored maximum, first
@@ -93,6 +94,7 @@ add_cap <- function(dy, newseries, label = "grid capacity", color = "red", zoom 
 
   dy$x$attrs$axes$y$valueRange <- c(0, max_y)
   dy$x$attrs$axes$y2$valueRange <- c(0, max_y)
+  dy$x$attrs$axes$y2$usedCap <- TRUE
 
   dy
 }

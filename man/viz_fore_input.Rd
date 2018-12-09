@@ -4,7 +4,8 @@
 \alias{viz_fore_input}
 \title{Visualize foreshift}
 \usage{
-viz_fore_input(obj, show_fixed = TRUE, aggregate = c("none", "object",
+viz_fore_input(obj, show_fixed = TRUE, show_cap = TRUE,
+  zoom_cap = FALSE, stacked = TRUE, aggregate = c("none", "object",
   "flex", "all"))
 }
 \arguments{

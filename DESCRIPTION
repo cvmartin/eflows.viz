@@ -1,6 +1,6 @@
 Package: eflows.viz
 Title: Visualization tools for eflows
-Version: 0.1.0.9000
+Version: 0.1.2.9000
 Date: 2018-16-10
 Author: person("Carlos", "Varela Martin", email = "cvarelamail@gmail.com",
     role = c("aut", "cre"))
@@ -18,7 +18,7 @@ Imports: eflows,
     lubridate, 
     shiny, 
     miniUI
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown,
     testthat, 
@@ -26,4 +26,3 @@ Suggests: knitr,
 VignetteBuilder: knitr
 URL: https://github.com/cvmartin/eflows.viz
 BugReports: https://github.com/cvmartin/eflows.viz/issues
-

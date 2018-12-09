@@ -11,6 +11,7 @@
 #' 1+1
 set_yaxis <- function(dy, n){
   dy$x$attrs$axes$y$valueRange <- c(0, n)
+  dy$x$attrs$axes$y2$valueRange <- c(0, n)
   dy
 }
 
