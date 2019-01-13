@@ -14,7 +14,7 @@ listify <- function(input) {
 # matrix manipulation -----------------------------------------------------
 mtx_tag_col <- function(matrix, name, vector = seq(1:ncol(matrix))){
   names <- sapply(vector,
-                  function(x){paste0(name, "_", x)}
+                  function(x){paste0(name, " | " , x)}
   )
   colnames(matrix) <- names
   matrix
