@@ -110,7 +110,6 @@ dyUnzoom <-function(dygraph) {
   )
 }
 
-
 viz_blank <- function(obj,
                       route,
                       show_fixed = TRUE,
@@ -125,12 +124,19 @@ viz_blank <- function(obj,
 
   val$is_e_frame(obj)
 
-  route <- route
+  # route <- route
 
   local <- list(data = lapply(route$flex, function(x){x[["data"]]}),
                 name = lapply(route$flex, function(x){x[["name"]]}),
                 steps = lapply(route$flex, function(x){x[["steps"]]}))
 
+  if (length(route$flex) == 0) agg <- "nonexistent"
+
+  # Special case when there is no data. `agg` becomes a marker
+  # to define what to do with data and the palette.
+  if (agg == "nonexistent"){
+    data <-  list()
+  }
 
   if (agg == "none"){
     data <-  mapply(mtx_tag_col,
@@ -166,11 +172,15 @@ viz_blank <- function(obj,
   data <- lapply(data, mtx_rm_zerocol)
   data <- do.call(cbind, rev(data))
 
-  pal <- c(palette_function(ncol(data)))
+  if (agg == "nonexistent"){
+    pal <- NULL
+  } else {
+    pal <- c(palette_function(ncol(data)))
+  }
 
   if (show_fixed == TRUE){
     f <- as.matrix(route$fixed)
-    colnames(f) <- "fixed"
+    colnames(f) <- "fixed demand"
     data <- cbind(data, f)
     pal <- c(pal, col$neutral)
   }

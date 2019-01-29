@@ -10,16 +10,19 @@ col = list(
 )
 
 gg_palette <- function(n) {
+  # if (n == 0 | is.null(n)) return(NULL)
   hues = seq(15, 375, length = n + 1)
   hcl(h = hues, l = 65, c = 100)[1:n]
 }
 
 foregrad <- function(n){
+  # if (n == 0 | is.null(n)) return(NULL)
   if (n == 1) return("darkgreen")
   colorRampPalette(c("orange","olivedrab", "darkgreen"))(n)
 }
 
 backgrad <- function(n){
+  # if (n == 0 | is.null(n)) return(NULL)
   if (n == 1) return("indianred3")
   colorRampPalette(c("darksalmon","indianred3", "purple4"))(n)
 }
