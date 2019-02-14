@@ -37,7 +37,7 @@ dy_style <- function(dygraph, units, ...) {
 
   dy <- dyAxis(dy, "y", label = units)
 
-  dy <- dyLegend(dy, show = "onmouseover", width = 150)
+  dy <- dyLegend(dy, show = "onmouseover", width = 160)
 
   dy <- dyOptions(dy,
                   mobileDisableYTouch = TRUE,
