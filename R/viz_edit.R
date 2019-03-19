@@ -15,6 +15,16 @@ set_yaxis <- function(dy, n){
   dy
 }
 
+#' Give the same group name to a list of dygraphs
+#'
+#' @param dy Dygraph
+#' @param n Double
+#'
+#' @return A dygraph, with the especification of the Y axis modified
+#' @export
+#'
+#' @examples
+#' 1+1
 set_group <- function(dy, groupname){
   dy$x$group <- groupname
   dy

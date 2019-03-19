@@ -45,6 +45,13 @@ viz_back_potential <- function(obj,
                        fillAlpha = 0.8,
                        colors = pal)
 
+  if (show_cap == TRUE){
+    cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
+    if (!is.null(cap_data)){
+      xdygraph <- add_cap(xdygraph, cap_data, zoom = zoom_cap)
+    }
+  }
+
   xdygraph
 
 }
@@ -91,6 +98,13 @@ viz_back_output <- function(obj,
                        stackedGraph = stacked,
                        fillAlpha = 0.8,
                        colors = pal)
+
+  if (show_cap == TRUE){
+    cap_data <- obj$infrastructure$input$grid$capacity %||% NULL
+    if (!is.null(cap_data)){
+      xdygraph <- add_cap(xdygraph, cap_data, zoom = zoom_cap)
+    }
+  }
 
   xdygraph
 
